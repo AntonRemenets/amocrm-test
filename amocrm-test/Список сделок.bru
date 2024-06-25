@@ -1,0 +1,15 @@
+meta {
+  name: Список сделок
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{process.env.AMO_URI}}/api/v4/leads
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{process.env.ACCESS_TOKEN}}
+}

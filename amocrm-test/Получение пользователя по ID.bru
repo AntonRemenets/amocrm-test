@@ -1,0 +1,15 @@
+meta {
+  name: Получение пользователя по ID
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{process.env.AMO_URI}}/api/v4/users/11194710
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{process.env.ACCESS_TOKEN}}
+}

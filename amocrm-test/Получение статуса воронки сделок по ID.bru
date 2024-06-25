@@ -1,0 +1,15 @@
+meta {
+  name: Получение статуса воронки сделок по ID
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{process.env.AMO_URI}}/api/v4/leads/pipelines/8314162/statuses/67790418
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{process.env.ACCESS_TOKEN}}
+}
