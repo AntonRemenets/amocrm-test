@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: {{process.env.AMO_URI}}/api/v4/leads
+  url: {{process.env.AMO_URI}}/api/v4/leads?query=Разработка интернет-магазина
   body: none
   auth: bearer
+}
+
+query {
+  query: Разработка интернет-магазина
 }
 
 auth:bearer {

@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common'
+import { Controller, Get, Param, Query } from '@nestjs/common'
 import { AmoCrmApiService } from './amocrmapi.service'
 
 @Controller('amo')
@@ -6,8 +6,8 @@ export class AmoCrmApiController {
   constructor(private amoapi: AmoCrmApiService) {}
 
   @Get('leads')
-  getAllLeads() {
-    return this.amoapi.getLeads()
+  getAllLeads(@Query() query?: number | string) {
+    return this.amoapi.getLeads(query)
   }
 
   @Get('user/:id')

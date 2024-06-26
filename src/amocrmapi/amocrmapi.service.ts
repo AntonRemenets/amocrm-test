@@ -13,7 +13,25 @@ export class AmoCrmApiService {
     private config: ConfigService,
   ) {}
 
-  async getLeads(): Promise<LeadModel[]> {
+  async getLeads(query?: number | string): Promise<LeadModel[]> {
+    if (query) {
+      try {
+        const { data } = await firstValueFrom(
+          this.httpService.get(
+            `${this.config.get<string>('AMO_URI')}/api/v4/leads?query=${query}`,
+            {
+              headers: {
+                Authorization: `Bearer ${this.config.get<string>('ACCESS_TOKEN')}`,
+              },
+            },
+          ),
+        )
+
+        return data._embedded.leads
+      } catch (e) {
+        console.log(e)
+      }
+    }
     try {
       const { data } = await firstValueFrom(
         this.httpService.get(

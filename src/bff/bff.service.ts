@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { AmoCrmApiService } from '../amocrmapi/amocrmapi.service'
-import { LeadModel } from '../amocrmapi/models/lead.model'
 import { LeadsResultModel } from './models/leadsresult.model'
 import { UserModel } from '../amocrmapi/models/user.model'
 
@@ -8,11 +7,11 @@ import { UserModel } from '../amocrmapi/models/user.model'
 export class BffService {
   constructor(private amoApi: AmoCrmApiService) {}
 
-  async getAll(): Promise<LeadsResultModel[]> {
-    const leads: Promise<LeadModel[]> = this.amoApi.getLeads()
+  async getAll(query?: number | string): Promise<LeadsResultModel[]> {
+    const leads = await this.amoApi.getLeads(query)
     const leadsResult: LeadsResultModel[] = []
 
-    for (const lead of await leads) {
+    for (const lead of leads) {
       const obj: LeadsResultModel = {
         id: undefined,
         name: undefined,
