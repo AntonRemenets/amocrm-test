@@ -1,0 +1,11 @@
+meta {
+  name: Get access token
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{process.env.AMO_URI}}/oauth2/access_token
+  body: json
+  auth: none
+}

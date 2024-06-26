@@ -14,44 +14,61 @@ export class AmoCrmApiService {
   ) {}
 
   async getLeads(): Promise<LeadModel[]> {
-    const { data } = await firstValueFrom(
-      this.httpService.get(
-        `${this.config.get<string>('AMO_URI')}/api/v4/leads`,
-        {
-          headers: {
-            Authorization: `Bearer ${this.config.get<string>('ACCESS_TOKEN')}`,
+    try {
+      const { data } = await firstValueFrom(
+        this.httpService.get(
+          `${this.config.get<string>('AMO_URI')}/api/v4/leads`,
+          {
+            headers: {
+              Authorization: `Bearer ${this.config.get<string>('ACCESS_TOKEN')}`,
+            },
           },
-        },
-      ),
-    )
-    return data._embedded.leads
+        ),
+      )
+
+      return data._embedded.leads
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   async getUserById(id: number): Promise<UserModel> {
-    const { data } = await firstValueFrom(
-      this.httpService.get(
-        `${this.config.get<string>('AMO_URI')}/api/v4/users/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${this.config.get<string>('ACCESS_TOKEN')}`,
+    try {
+      const { data } = await firstValueFrom(
+        this.httpService.get(
+          `${this.config.get<string>('AMO_URI')}/api/v4/users/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${this.config.get<string>('ACCESS_TOKEN')}`,
+            },
           },
-        },
-      ),
-    )
-    return data
+        ),
+      )
+      return data
+    } catch (e) {
+      console.log(e)
+    }
   }
 
-  async getStatus(pipeline_id, status_id): Promise<PipelineStatusModel> {
-    const { data } = await firstValueFrom(
-      this.httpService.get(
-        `${this.config.get<string>('AMO_URI')}/api/v4/leads/pipelines/${pipeline_id}/statuses/${status_id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${this.config.get<string>('ACCESS_TOKEN')}`,
+  async getStatus(
+    pipeline_id: number,
+    status_id: number,
+  ): Promise<PipelineStatusModel> {
+    try {
+      const { data } = await firstValueFrom(
+        this.httpService.get(
+          `${this.config.get<string>('AMO_URI')}/api/v4/leads/pipelines/${pipeline_id}/statuses/${status_id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${this.config.get<string>('ACCESS_TOKEN')}`,
+            },
           },
-        },
-      ),
-    )
-    return data
+        ),
+      )
+
+      return data
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
